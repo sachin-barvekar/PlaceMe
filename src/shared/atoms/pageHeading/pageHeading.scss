@@ -1,0 +1,16 @@
+.page-heading {
+  display: inline-flex;
+  margin-bottom: 2rem;
+  margin-left: 1.5rem;
+  align-items: baseline;
+
+  &__title {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  &__description {
+    margin-left: 2rem;
+    display: inline-flex;
+  }
+}

@@ -1,0 +1,87 @@
+{
+    "totalElements": 10,
+    "size": 10,
+    "content": [
+      {
+        "student": {
+          "fullName": "Rajesh Kumar",
+          "email": "rajesh.kumar@example.com",
+          "course": "Computer Science",
+          "mobile": "+91 9876543210"
+        }
+      },
+      {
+        "student": {
+          "fullName": "Anita Sharma",
+          "email": "anita.sharma@example.com",
+          "course": "Information Technology",
+          "mobile": "+91 9123456789"
+        }
+      },
+      {
+        "student": {
+          "fullName": "Vikram Singh",
+          "email": "vikram.singh@example.com",
+          "course": "Mechanical Engineering",
+          "mobile": "+91 9988776655"
+        }
+      },
+      {
+        "student": {
+          "fullName": "Neha Patel",
+          "email": "neha.patel@example.com",
+          "course": "Civil Engineering",
+          "mobile": "+91 9090909090"
+        }
+      },
+      {
+        "student": {
+          "fullName": "Amitabh Desai",
+          "email": "amitabh.desai@example.com",
+          "course": "Electrical Engineering",
+          "mobile": "+91 9876541234"
+        }
+      },
+      {
+        "student": {
+          "fullName": "Pooja Verma",
+          "email": "pooja.verma@example.com",
+          "course": "Business Administration",
+          "mobile": "+91 9234567890"
+        }
+      },
+      {
+        "student": {
+          "fullName": "Suresh Menon",
+          "email": "suresh.menon@example.com",
+          "course": "Electronics & Communication",
+          "mobile": "+91 9654321098"
+        }
+      },
+      {
+        "student": {
+          "fullName": "Priya Iyer",
+          "email": "priya.iyer@example.com",
+          "course": "Biotechnology",
+          "mobile": "+91 9988774422"
+        }
+      },
+      {
+        "student": {
+          "fullName": "Ravi Gupta",
+          "email": "ravi.gupta@example.com",
+          "course": "Automobile Engineering",
+          "mobile": "+91 9123451234"
+        }
+      },
+      {
+        "student": {
+          "fullName": "Sneha Reddy",
+          "email": "sneha.reddy@example.com",
+          "course": "Chemical Engineering",
+          "mobile": "+91 9876512345"
+        }
+      }
+    ]
+  }
+  

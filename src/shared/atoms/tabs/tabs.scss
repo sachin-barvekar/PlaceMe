@@ -1,0 +1,6 @@
+@use '../../../scss/abstracts/variables' as *;
+.multi-color {
+  .rs-nav-subtle .rs-nav-item.rs-nav-item-active:before {
+    background-color: orangered
+  }
+}

@@ -1,0 +1,101 @@
+@use '../../../scss/abstracts/variables' as *;
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  background-color: $color-white;
+  border-radius: 0 5px 0 0;
+  border-bottom: 2px solid $toolbar-border-bottom-color;
+  overflow: scroll;
+
+  .toolbar-left {
+    display: flex;
+
+    .toolbar-totals {
+      color: $text-color-lighter;
+      font-size: 0.75rem;
+      margin-top: 25px;
+      margin-left: 25px;
+    }
+  }
+
+  .rs-nav-bar {
+    display: none;
+  }
+
+  .rs-nav-subtle {
+    padding-top: 15px;
+    padding-left: 15px;
+
+    .rs-nav-item {
+      padding-bottom: 15px;
+      padding-right: 15px;
+      padding-left: 15px;
+      color: $text-color-lighter;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 38%;
+        right: 0;
+        height: 35px;
+        width: 2px;
+        background-color: $text-color-lighter;
+        transform: translateY(-50%);
+      }
+
+      &:last-child {
+        color: red;
+      }
+    }
+
+    .rs-nav-item.rs-nav-item-active {
+      color: $text-color-primary;
+    }
+
+    .rs-nav-item.rs-nav-item-active:before {
+      background-color: $text-color-primary;
+    }
+  }
+
+  .toolbar-right-pane {
+    display: flex;
+
+    .rs-btn-icon.rs-btn>.rs-icon {
+      font-size: 14px;
+    }
+
+    .select-picker {
+      width: 100%;
+
+      .rs-picker-toggle {
+        margin-top: 10px;
+        height: 35px;
+        background-color: white !important;
+        border-radius: 8px;
+        border-color: var(--rs-gray-200);
+      }
+
+      .rs-picker-toggle-placeholder {
+        color: var(--rs-gray-600) !important;
+      }
+
+      .rs-picker-caret-icon {
+        color: var(--rs-gray-600) !important;
+      }
+
+      .rs-picker-toggle-value,
+      .rs-picker-has-value .rs-picker-toggle .rs-picker-toggle-value {
+        color: var(--rs-gray-600) !important;
+      }
+    }
+  }
+
+  .toolbar-btn {
+    background-color: $button-color-primary;
+    color: #fff;
+    border-radius: 5px;
+    margin: 10px;
+  }
+}

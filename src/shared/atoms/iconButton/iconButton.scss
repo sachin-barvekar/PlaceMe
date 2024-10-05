@@ -1,0 +1,24 @@
+@use '../../../scss/abstracts/variables' as *;
+
+button.icon-button {
+  padding: 0.5rem;
+  border-radius: 1rem;
+  --rs-btn-default-bg: #{$button-color-primary};
+  --rs-btn-default-hover-bg: #{$text-color-primary};
+  --rs-btn-default-text: #{$color-white};
+  --rs-btn-default-hover-text: #{$color-white};
+
+  &.lighter {
+    --rs-btn-default-bg: #{$text-color-lighter};
+    --rs-btn-default-hover-bg: #{$text-color-lighter};
+    --rs-btn-default-text: #{$color-white};
+    --rs-btn-default-hover-text: #{$color-white};
+  }
+
+  &.icon-button__active {
+    --rs-btn-default-bg: #{$text-color-lighter};
+    --rs-btn-default-hover-bg: #{$text-color-lighter};
+    --rs-btn-default-text: #{$color-white};
+    --rs-btn-default-hover-text: #{$color-white};
+  }
+}

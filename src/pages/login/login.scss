@@ -1,0 +1,60 @@
+@use '../../scss/abstracts' as *;
+
+.login_page {
+  .rs-row {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background-color: #F2F6F9;
+
+    .left_side,
+    .right_side {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .right_side {
+      background-color: $background-color-darker-2;
+
+      .innner_box {
+        background-color: var(--white);
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+        .placeme_logo {
+          width: 70%;
+          max-width: 300px;
+          margin-bottom: 20px;
+        }
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          color: $text-color-primary;
+          transition: background-color 0.3s ease;
+
+          img.google_logo {
+            width: 20px;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .rs-row {
+      flex-direction: column;
+    }
+  }
+}
