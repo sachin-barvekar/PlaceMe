@@ -10,7 +10,7 @@ import {
 import { notifyError, notifySuccess } from '../utils'
 import { auth } from '../config/firebase'
 
-const allowedEmails = ['sachinbarvekar2003@gmail.com']
+const allowedEmails = ['sachinbarvekar2003@gmail.com', 'maheshgaikwad3222@gmail.com', 'omkaryc03@gmail.com']
 
 interface AuthContextType {
   user: User | null;
