@@ -1,15 +1,24 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { Row } from 'rsuite'
 import { Button, Loader } from '../../shared'
 import { AuthContext } from '../../contexts/AuthContext'
 import { LOGO, LOGIN } from '../../assets/images'
+import SelectDropdown from '../../shared/atoms/selectDropdown/SelectDropdown'
 import GoogleLogo from '../../assets/images/google.svg'
 import './login.scss'
+
+const roles = [
+  { label: 'Select Role', value: '' },
+  { label: 'Admin', value: 'admin' },
+  { label: 'Student', value: 'student' },
+  { label: 'Recruiter', value: 'recruiter' }
+]
 
 function LoginPage() {
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
+  const [selectedRole, setSelectedRole] = useState<string>('')
 
   if (authContext?.loading) {
     return <Loader />
@@ -28,6 +37,8 @@ function LoginPage() {
         // eslint-disable-next-line
         console.error('Login failed:', error)
       }
+    } else {
+      alert('Please select a role before logging in.')
     }
   }
 
@@ -41,8 +52,17 @@ function LoginPage() {
           <div className="innner_box">
             <h1>Welcome</h1>
             <span>to</span>
+
             <img src={LOGO} className="placeme_logo" alt="placeMe Logo" />
-            <Button onClick={handleLogin}>
+            <SelectDropdown
+              data={roles}
+              searchable={false}
+              style={{ width: 224, marginBottom: 20 }}
+              placeholder="Select Role"
+              onChange={setSelectedRole}
+              value={selectedRole}
+            />
+            <Button onClick={handleLogin} disabled={!selectedRole}>
               Login with
               <img src={GoogleLogo} className="google_logo" alt="google_logo" />
             </Button>

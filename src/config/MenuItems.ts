@@ -1,23 +1,16 @@
-import { HTMLAttributes } from 'react'
-import NoticeIcon from '@rsuite/icons/Notice'
-import UserInfoIcon from '@rsuite/icons/UserInfo'
 import { AiOutlineHome } from 'react-icons/ai'
 import { MdFeedback } from 'react-icons/md'
 import { FaRegHandshake } from 'react-icons/fa'
+import NoticeIcon from '@rsuite/icons/Notice'
+import UserInfoIcon from '@rsuite/icons/UserInfo'
 import CreativeIcon from '@rsuite/icons/Creative'
 
-type menuItemType = {
-  id: string,
-  name: string,
-  link?: string,
-  icon: React.FC<HTMLAttributes<SVGElement>>
-}
-
-const menuItems: menuItemType[] = [
+// Define menu items with their icons
+const allMenuItems = [
   {
     id: '1',
     name: 'Dashboard',
-    link: '/',
+    link: '/dashboard',
     icon: AiOutlineHome
   },
   {
@@ -35,22 +28,21 @@ const menuItems: menuItemType[] = [
   {
     id: '4',
     name: 'Job Applications',
-    link: '',
+    link: '/job-applications',
     icon: CreativeIcon
   },
   {
     id: '5',
     name: 'OnCampus Offers',
-    link: '',
+    link: '/oncampus-offers',
     icon: FaRegHandshake
   },
-
   {
     id: '6',
     name: 'Feedback',
-    link: '',
+    link: '/feedback',
     icon: MdFeedback
   }
 ]
 
-export default menuItems
+export default allMenuItems

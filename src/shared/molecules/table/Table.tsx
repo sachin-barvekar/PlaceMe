@@ -6,7 +6,12 @@ import {
   Cell,
   StatusCell,
   ActionCell,
-  CardActionCell
+  CardActionCell,
+  ProfileIconCell,
+  UserStatusCell,
+  LocationCell,
+  PaymentStatusCell,
+  DateTimeCell
 } from './cells'
 import TableFooter from './footer/TableFooter'
 import './Table.scss'
@@ -52,6 +57,7 @@ function Table<R extends RowDataType<any>, K extends RowKeyType>(
 
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(initialPageSize)
+  const filteredData = data.filter((item) => item !== null)
 
   const handlePageChangeInternal = (page: number) => {
     setCurrentPage(page)
@@ -89,7 +95,7 @@ function Table<R extends RowDataType<any>, K extends RowKeyType>(
           wordWrap="break-word"
           hover={hover}
           fillHeight={fillHeight}
-          data={data}
+          data={filteredData}
           onRowClick={onRowClick}
           {...rest}
         >
@@ -122,6 +128,11 @@ Table.HeaderCell = HeaderCell
 Table.ActionCell = ActionCell
 Table.StatusCell = StatusCell
 Table.CardActionCell = CardActionCell
+Table.ProfileIconCell = ProfileIconCell
+Table.UserStatusCell = UserStatusCell
+Table.LocationCell = LocationCell
+Table.PaymentStatusCell = PaymentStatusCell
+Table.DateTimeCell = DateTimeCell
 Table.DEFAULT_PAGE_SIZE = DEFAULT_PAGE_SIZE
 
 export default Table
