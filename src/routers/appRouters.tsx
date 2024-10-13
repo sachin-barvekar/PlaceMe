@@ -12,10 +12,11 @@ const StudentListPage = React.lazy(
   () => import('../pages/students/studentList/StudentList')
 )
 type AuthGuardProps = {
-  children: ReactElement
+  children: ReactElement,
+  allowedRoles?: string[]
 }
 
-function AuthGuard({ children }: AuthGuardProps) {
+function AuthGuard({ children, allowedRoles  }: AuthGuardProps) {
   const authContext = useContext(AuthContext)
 
   if (authContext?.loading) {
@@ -24,6 +25,11 @@ function AuthGuard({ children }: AuthGuardProps) {
 
   if (!authContext?.user) {
     return <Navigate to="/auth" />
+  }
+
+  if (allowedRoles && !allowedRoles.includes(authContext.role!)) {
+    // Redirect if user doesn't have the required role
+    return <Navigate to="/unauthorized" />
   }
 
   return children
@@ -55,7 +61,11 @@ const appRouter = () =>
             },
             {
               path: '/users',
-              element: <StudentListPage />
+              element: (
+                <AuthGuard allowedRoles={['admin']}>
+                  <StudentListPage />
+                </AuthGuard>
+              )
             }
           ]
         }

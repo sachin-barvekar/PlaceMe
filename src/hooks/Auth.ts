@@ -7,26 +7,48 @@ import {
   browserLocalPersistence,
   User
 } from 'firebase/auth'
-import { notifyError, notifySuccess } from '../utils'
+import { notifySuccess, notifyError } from '../utils'
 import { auth } from '../config/firebase'
 
-const allowedEmails = ['sachinbarvekar2003@gmail.com', 'maheshgaikwad3222@gmail.com', 'omkaryc03@gmail.com']
+const adminEmails = process.env.REACT_APP_ADMIN_EMAILS?.split(',') || []
+const studentsEmails = process.env.REACT_APP_STUDENTS_EMAILS?.split(',') || []
+const recruitersEmails =
+  process.env.REACT_APP_RECRUITERS_EMAILS?.split(',') || []
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
   login: () => Promise<void>;
   logout: () => Promise<void>;
+  role: 'admin' | 'student' | 'recruiter' | null;
 }
 
 const useAuth = (): AuthContextType => {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
+  const [role, setRole] = useState<'admin' | 'student' | 'recruiter' | null>(
+    null
+  )
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (allowedEmails?.includes(currentUser?.email ?? '')) {
+      setLoading(true)
+      if (currentUser?.email) {
+        const email = currentUser?.email
+
+        if (adminEmails.includes(email)) {
+          setRole('admin')
+        } else if (studentsEmails.includes(email)) {
+          setRole('student')
+        } else if (recruitersEmails.includes(email)) {
+          setRole('recruiter')
+        } else {
+          setRole(null)
+          signOut(auth)
+          localStorage.clear()
+        }
         setUser(currentUser)
+        setLoading(false)
       } else {
         setUser(null)
         localStorage.clear()
@@ -48,13 +70,27 @@ const useAuth = (): AuthContextType => {
       const provider = new GoogleAuthProvider()
       const result = await signInWithPopup(auth, provider)
       const userData: User = result.user
-      if (allowedEmails.includes(userData.email ?? '')) {
-        notifySuccess('Login Success')
-        setUser(userData)
+      const email = userData.email ?? ''
+
+      if (adminEmails.includes(email)) {
+        setRole('admin')
+        localStorage.setItem('role', 'admin')
+      } else if (studentsEmails.includes(email)) {
+        setRole('student')
+        localStorage.setItem('role', 'student')
+      } else if (recruitersEmails.includes(email)) {
+        setRole('recruiter')
+        localStorage.setItem('role', 'recruiter')
       } else {
         notifyError('Unauthorized email, login failed')
         await signOut(auth)
+        localStorage.clear()
+        return
       }
+      notifySuccess('Login Success')
+      setUser(userData)
+      const accessToken = await userData.getIdToken()
+      localStorage.setItem('token', accessToken)
     } catch (error) {
       notifyError('Login failed')
     }
@@ -64,6 +100,7 @@ const useAuth = (): AuthContextType => {
     try {
       await signOut(auth)
       setUser(null)
+      setRole(null)
       localStorage.clear()
     } catch (error) {
       notifyError('Logout failed')
@@ -74,7 +111,8 @@ const useAuth = (): AuthContextType => {
     user,
     loading,
     login,
-    logout
+    logout,
+    role
   }
 }
 

@@ -1,13 +1,40 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import { FC, RefAttributes } from 'react'
-import { RowDataType, RowKeyType, Cell as RsuiteCell } from 'rsuite-table'
+import { Whisper, Tooltip } from 'rsuite'
+import { Cell as RsuiteCell, RowDataType, RowKeyType } from 'rsuite-table'
 import { InnerCellProps } from 'rsuite-table/lib/Cell'
 
-type Props = InnerCellProps<RowDataType<any>, RowKeyType> &
-  RefAttributes<HTMLDivElement>
+type CellProps<
+  R extends RowDataType<any>,
+  K extends RowKeyType
+> = InnerCellProps<R, K> & {
+  dataKey: string,
+  rowData?: R,
+  tooltip?: boolean
+}
 
-const Cell: FC<Props> = ({ dataKey, ...props }: Props) => {
-  return <RsuiteCell dataKey={dataKey} {...props} />
+const Cell = <R extends RowDataType<any>, K extends RowKeyType>({
+  dataKey,
+  rowData,
+  tooltip,
+  ...props
+}: CellProps<R, K>): JSX.Element => {
+  const cellContent = rowData?.[dataKey]
+  const displayContent =
+    cellContent === null || cellContent === undefined ? '-' : cellContent
+
+  if (tooltip && cellContent) {
+    return (
+      <Whisper
+        placement="bottom"
+        trigger="hover"
+        speaker={<Tooltip>{cellContent}</Tooltip>}
+      >
+        <RsuiteCell {...props} style={{ cursor: 'pointer' }}>
+          {cellContent}
+        </RsuiteCell>
+      </Whisper>
+    )
+  }
+  return <RsuiteCell {...props}>{displayContent}</RsuiteCell>
 }
 
 export default Cell

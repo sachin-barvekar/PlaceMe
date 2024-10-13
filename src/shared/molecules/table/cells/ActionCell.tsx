@@ -1,9 +1,14 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react'
 import { Cell } from 'rsuite-table'
 import EditIcon from '@rsuite/icons/Edit'
 import TrashIcon from '@rsuite/icons/Trash'
 import VisibleIcon from '@rsuite/icons/Visible'
 import ShareOutlineIcon from '@rsuite/icons/ShareOutline'
+import { RiSecurePaymentFill } from 'react-icons/ri'
+import { Whisper, Tooltip } from 'rsuite'
+import './ActionCell.scss'
 import {
   MdNotificationsActive,
   MdLocalFlorist,
@@ -14,7 +19,8 @@ type Props = {
   rowData?: any,
   dataKey: string,
   onAction?: (eventKey: string | undefined, rowData: any) => void,
-  actionOptions?: string[]
+  actionOptions?: string[],
+  tooltip?: boolean
 }
 
 const defaultProps = {
@@ -28,20 +34,27 @@ const defaultOptions = [
   { label: 'Edit', eventKey: '2', icon: <EditIcon /> },
   { label: 'Delete', eventKey: '3', icon: <TrashIcon /> },
   { label: 'Share', eventKey: '4', icon: <ShareOutlineIcon /> },
-  { label: 'Notifications', eventKey: '5', icon: <MdNotificationsActive /> },
-  { label: 'View Farm', eventKey: '6', icon: <MdLocalFlorist /> },
-  { label: 'Download', eventKey: '7', icon: <MdFileDownload /> }
+  {
+    label: 'Send Notification',
+    eventKey: '5',
+    icon: <MdNotificationsActive />
+  },
+  { label: 'View Farms', eventKey: '6', icon: <MdLocalFlorist /> },
+  { label: 'Download Report', eventKey: '7', icon: <MdFileDownload /> },
+  { label: 'Make Payment', eventKey: '8', icon: <RiSecurePaymentFill /> }
 ]
 
 const ActionCell: React.FC<Props> = ({
   rowData,
   dataKey,
   actionOptions = [],
+  tooltip,
   ...props
 }) => {
-  const optionsToDisplay = actionOptions.length
-    ? defaultOptions.filter((option) => actionOptions.includes(option.label))
-    : defaultOptions
+  const optionsToDisplay =
+    actionOptions.length > 0
+      ? defaultOptions.filter((option) => actionOptions.includes(option.label))
+      : defaultOptions
 
   const handleActionClick = (eventKey: string | undefined) => {
     if (eventKey && typeof props.onAction === 'function') {
@@ -51,27 +64,24 @@ const ActionCell: React.FC<Props> = ({
 
   return (
     <Cell {...props} className="link-group">
-      <div
-        style={{
-          display: 'flex',
-          gap: '15px'
-        }}
-      >
-        {optionsToDisplay?.map((option) => (
-          // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+      <div className="action-icons-wrapper">
+        {optionsToDisplay.map((option) => (
           <div
             key={option.eventKey}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              cursor: 'pointer'
-            }}
+            className="action-icon"
             onClick={() => handleActionClick(option.eventKey)}
           >
-            {option.icon && (
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                {option.icon}
-              </div>
+            {tooltip ? (
+              <Whisper
+                key={option.eventKey}
+                placement="bottom"
+                trigger="hover"
+                speaker={<Tooltip>{option.label}</Tooltip>}
+              >
+                <div className="icon-container">{option.icon}</div>
+              </Whisper>
+            ) : (
+              <div className="icon-container">{option.icon}</div>
             )}
           </div>
         ))}
