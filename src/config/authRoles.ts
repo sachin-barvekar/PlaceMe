@@ -1,22 +1,41 @@
 // authRoles.ts
 type RoleType = 'admin' | 'student' | 'recruiter' | null
+// import { FaEnvelopeOpenText } from "react-icons/fa";
 
 const ROLE_PERMISSIONS = {
   admin: {
     menuItems: [
       'Dashboard',
-      'Notification',
-      'Users',
-      'Job Applications',
-      'OnCampus Offers',
-      'Feedback'
+      'Students',
+      'Recruiters',
+      'Job Openings',
+      'Selected Students',
+      'Notifications',
+      'Feedback',
+      'Signout'
     ]
   },
   student: {
-    menuItems: ['Dashboard', 'Notification', 'Feedback']
+    menuItems: [
+      'Dashboard',
+      'Job Openings',
+      'Placement Pro',
+      'Applied Jobs',
+      'Notification',
+      'Feedback',
+      'Signout'
+    ]
   },
   recruiter: {
-    menuItems: ['Dashboard', 'Job Applications', 'OnCampus Offers']
+    menuItems: [
+      'Dashboard',
+      'Jobs',
+      'Job Applications',
+      'FaEnvelopeOpenText',
+      'Notification',
+      'Feedback',
+      'Signout'
+    ]
   }
 }
 

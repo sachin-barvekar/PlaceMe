@@ -57,10 +57,14 @@ const appRouter = () =>
           children: [
             {
               path: '/',
-              element: <DashboardPage />
+              element:  (
+                <AuthGuard allowedRoles={['admin','student','recruiter']}>
+                  <DashboardPage />
+                </AuthGuard>
+                )
             },
             {
-              path: '/users',
+              path: '/student',
               element: (
                 <AuthGuard allowedRoles={['admin']}>
                   <StudentListPage />

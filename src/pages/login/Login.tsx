@@ -23,7 +23,6 @@ function LoginPage() {
   if (authContext?.loading) {
     return <Loader />
   }
-
   if (authContext?.user) {
     return <Navigate to="/" />
   }
@@ -32,6 +31,7 @@ function LoginPage() {
     if (authContext) {
       try {
         await authContext.login()
+        console.log(authContext)
         navigate('/')
       } catch (error) {
         // eslint-disable-next-line

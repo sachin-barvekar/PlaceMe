@@ -1,9 +1,11 @@
 import { FC, useCallback, useState } from 'react'
 // import { SortType } from 'rsuite-table'
 import { Table, Toolbar } from '../../../shared'
-import './StudentList.scss'
+import '../../../scss/common/list/List.scss'
+import UserPayment from './addStudent/AddStudent'
 
 const { Column, HeaderCell, Cell } = Table
+
 
 const COLUMNS = [
   { key: 'fullName', label: 'Full Name' },
@@ -79,6 +81,7 @@ const StudentList: FC = () => {
   // Using state for mock data
   const [data] = useState(mockStudentData)
   const [isFetching] = useState(false)
+  const [isModalOpen, setIsModalOpen]=useState<boolean>(false)
 
   const handleSortColumn = useCallback(() => {
     // Implement sorting logic here if needed
@@ -90,8 +93,13 @@ const StudentList: FC = () => {
 
   const options = [
     {
-      label: 'Student List',
+      label: 'All Students',
       value: 'all',
+      onClick: () => {}
+    },
+    {
+      label: 'Verified Students',
+      value: '',
       onClick: () => {}
     }
   ]
@@ -102,6 +110,8 @@ const StudentList: FC = () => {
         options={options}
         onSearchChange={() => {}}
         total={data.length ?? 0}
+        buttonName='Add Student'
+        onButtonClick={() => setIsModalOpen(true)}
       />
       <div className="user-list__main-container">
         <Table
@@ -113,7 +123,7 @@ const StudentList: FC = () => {
           onRowClick={handleRowClick}
           total={data.length}
           defaultPageSize={10}
-          onPageChange={() => {}} // If pagination is needed, implement here
+          onPageChange={() => {}}
         >
           {COLUMNS.map((column, index) => {
             const { key, label } = column
@@ -133,6 +143,7 @@ const StudentList: FC = () => {
           })}
         </Table>
       </div>
+      <UserPayment isOpen={isModalOpen} onClose={()=>setIsModalOpen(false)}/>
     </div>
   )
 }

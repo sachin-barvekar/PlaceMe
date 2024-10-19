@@ -1,0 +1,40 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  .report-dash {
+    display: inherit;
+    justify-content: space-between;
+    .sub-dash {
+      background-color: white;
+      margin: 1rem 0;
+      padding: 0.5rem 1rem;
+      padding-bottom: 1.5rem;
+      border-radius: 5px;
+      width: 47%;
+    }
+  }
+  .dashboard-icon {
+    font-size: 30px;
+  }
+
+  .placed {
+    color: var(--rs-green-500);
+  }
+
+  .pending {
+    color: var(--rs-orange-500);
+  }
+
+  .iconcancel {
+    color: var(--rs-color-red);
+  }
+
+  .iconopen {
+    color: var(--rs-yellow-500);
+  }
+
+  .iconinitiated {
+    color: var(--rs-color-blue);
+  }
+}
