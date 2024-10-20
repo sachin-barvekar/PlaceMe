@@ -1,22 +1,33 @@
-// authRoles.ts
 type RoleType = 'admin' | 'student' | 'recruiter' | null
 
 const ROLE_PERMISSIONS = {
   admin: {
     menuItems: [
       'Dashboard',
-      'Notification',
-      'Users',
-      'Job Applications',
-      'OnCampus Offers',
+      'Students',
+      'Recruiters',
+      'Job Openings',
+      'Placed Students',
       'Feedback'
     ]
   },
   student: {
-    menuItems: ['Dashboard', 'Notification', 'Feedback']
+    menuItems: [
+      'Dashboard',
+      'Job Openings',
+      'Placement Pro',
+      'Applied Jobs',
+      'Feedback'
+    ]
   },
   recruiter: {
-    menuItems: ['Dashboard', 'Job Applications', 'OnCampus Offers']
+    menuItems: [
+      'Dashboard',
+      'Jobs',
+      'Job Applications',
+      'FaEnvelopeOpenText',
+      'Feedback'
+    ]
   }
 }
 

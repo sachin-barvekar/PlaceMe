@@ -7,11 +7,11 @@
 
   .card-wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 16px;
     margin-bottom: 1rem;
     overflow: scroll;
-    max-height: calc(100vh - 350px);
+    max-height: calc(100vh - 300px);
 
     .card {
       border: 1px solid #ddd;
@@ -29,7 +29,7 @@
 
       .card-body {
         padding: 1rem;
-
+        text-align: center;
         .select-button {
           background-color: $text-color-green !important;
           color: var(--white);

@@ -1,34 +1,35 @@
+@use '../../../../scss/abstracts/variables' as *;
 .link-group {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-  }
-  
-  .action-icons-wrapper {
-    display: flex;
-    gap: 5px;
-  }
-  
-  .action-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    padding: 10px 0px; 
-    border-radius: 5px; 
-  }
-  
-  .icon-container {
-    display: flex;
-    align-items: center;
-    padding: 5px; 
-    border-radius: 5px;
-    background-color: var(--rs-gray-500);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-icons-wrapper {
+  display: flex;
+  gap: 5px;
+}
+
+.action-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 10px 0px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: var(--rs-gray-500);
+  color: white;
+
+  &:hover {
+    background-color: $text-color-primary;
     color: white;
-  
-    &:hover {
-      background-color: var(--rs-orange-500);
-      color: white;
-    }
   }
-  
+}

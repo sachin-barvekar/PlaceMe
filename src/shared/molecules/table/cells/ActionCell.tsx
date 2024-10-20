@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react'
 import { Cell } from 'rsuite-table'
 import EditIcon from '@rsuite/icons/Edit'
@@ -9,11 +7,7 @@ import ShareOutlineIcon from '@rsuite/icons/ShareOutline'
 import { RiSecurePaymentFill } from 'react-icons/ri'
 import { Whisper, Tooltip } from 'rsuite'
 import './ActionCell.scss'
-import {
-  MdNotificationsActive,
-  MdLocalFlorist,
-  MdFileDownload
-} from 'react-icons/md'
+import { MdNotificationsActive, MdFileDownload } from 'react-icons/md'
 
 type Props = {
   rowData?: any,
@@ -39,9 +33,8 @@ const defaultOptions = [
     eventKey: '5',
     icon: <MdNotificationsActive />
   },
-  { label: 'View Farms', eventKey: '6', icon: <MdLocalFlorist /> },
-  { label: 'Download Report', eventKey: '7', icon: <MdFileDownload /> },
-  { label: 'Make Payment', eventKey: '8', icon: <RiSecurePaymentFill /> }
+  { label: 'Download', eventKey: '6', icon: <MdFileDownload /> },
+  { label: 'Make Payment', eventKey: '7', icon: <RiSecurePaymentFill /> }
 ]
 
 const ActionCell: React.FC<Props> = ({
@@ -66,7 +59,8 @@ const ActionCell: React.FC<Props> = ({
     <Cell {...props} className="link-group">
       <div className="action-icons-wrapper">
         {optionsToDisplay.map((option) => (
-          <div
+          <button
+            type="button"
             key={option.eventKey}
             className="action-icon"
             onClick={() => handleActionClick(option.eventKey)}
@@ -83,7 +77,7 @@ const ActionCell: React.FC<Props> = ({
             ) : (
               <div className="icon-container">{option.icon}</div>
             )}
-          </div>
+          </button>
         ))}
       </div>
     </Cell>

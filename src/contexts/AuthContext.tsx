@@ -15,7 +15,16 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const auth = useAuth()
 
-  const contextValue = useMemo(() => auth, [auth.user, auth.role, auth.loading])
+  const contextValue = useMemo(() => {
+    return {
+      user: auth.user,
+      role: auth.role,
+      loading: auth.loading,
+      login: auth.login,
+      logout: auth.logout
+    }
+  }, [auth])
+
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   )
