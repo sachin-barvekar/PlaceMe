@@ -6,8 +6,10 @@ import { CardActionCell } from '../table/cells'
 interface CardProps {
   imageUrl: string;
   name: string;
-  hindiName: string;
-  marathiName: string;
+  Branch: string;
+  CompanyName: string;
+  Designation: string;
+  Package: string;
   onAction?: (eventKey: string | undefined, rowData: any) => void;
   data?: any;
   actionOptions?: string[];
@@ -18,8 +20,10 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({
   imageUrl,
   name,
-  hindiName,
-  marathiName,
+  Branch,
+  CompanyName,
+  Designation,
+  Package,
   onAction,
   data,
   actionOptions,
@@ -34,8 +38,10 @@ const Card: React.FC<CardProps> = ({
 
       <div className="card-body">
         <h3>{name}</h3>
-        <p>Hindi Name: {hindiName}</p>
-        <p>Marathi Name: {marathiName}</p>
+        <p>Branch: {Branch}</p>
+        <p>{CompanyName}</p>
+        <p>Role: {Designation}</p>
+        <p>Package: {Package}</p>
         {handleSelection && (
           <Button
             className="select-button"

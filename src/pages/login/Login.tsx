@@ -31,6 +31,7 @@ function LoginPage() {
     if (authContext) {
       try {
         await authContext.login()
+        // eslint-disable-next-line
         console.log(authContext)
         navigate('/')
       } catch (error) {
@@ -38,6 +39,7 @@ function LoginPage() {
         console.error('Login failed:', error)
       }
     } else {
+      // eslint-disable-next-line
       alert('Please select a role before logging in.')
     }
   }

@@ -1,6 +1,4 @@
-// authRoles.ts
 type RoleType = 'admin' | 'student' | 'recruiter' | null
-// import { FaEnvelopeOpenText } from "react-icons/fa";
 
 const ROLE_PERMISSIONS = {
   admin: {
@@ -9,10 +7,8 @@ const ROLE_PERMISSIONS = {
       'Students',
       'Recruiters',
       'Job Openings',
-      'Selected Students',
-      'Notifications',
-      'Feedback',
-      'Signout'
+      'Placed Students',
+      'Feedback'
     ]
   },
   student: {
@@ -21,9 +17,7 @@ const ROLE_PERMISSIONS = {
       'Job Openings',
       'Placement Pro',
       'Applied Jobs',
-      'Notification',
-      'Feedback',
-      'Signout'
+      'Feedback'
     ]
   },
   recruiter: {
@@ -32,9 +26,7 @@ const ROLE_PERMISSIONS = {
       'Jobs',
       'Job Applications',
       'FaEnvelopeOpenText',
-      'Notification',
-      'Feedback',
-      'Signout'
+      'Feedback'
     ]
   }
 }

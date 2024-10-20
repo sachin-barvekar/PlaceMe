@@ -13,5 +13,7 @@ export { default as Section } from './section/Section'
 export { default as DashCard } from './dashCard/DashCard'
 export { default as PieChart } from './charts/pieChart/PieChart'
 export { default as BarChart } from './charts/barChart/BarChart'
+export { default as LineChart } from './charts/lineChart/LineChart'
+export { default as ProgressCircle } from './charts/progressCircle/ProgressCircle'
 
 export * from './InputUnits'

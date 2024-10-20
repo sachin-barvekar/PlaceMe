@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
-import { ButtonToolbar, Col, Uploader, DatePicker } from 'rsuite'
+import { ButtonToolbar, Col, Uploader } from 'rsuite'
 import { Formik, Form, FormikHelpers, FormikProps } from 'formik'
 import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro'
-import { notifyError, notifySuccess } from '../../../../utils'
+import { notifyError, notifySuccess } from '../../../utils'
 
 import {
   Button,
@@ -11,49 +11,36 @@ import {
   Section,
   TextInput,
   Modal,
-  SelectDropdown,
   Panel
-} from '../../../../shared'
-import '../../../../scss/common/forms/Form.scss'
+} from '../../../shared'
+import '../../../scss/common/forms/Form.scss'
 import {
-  STUDENT_FORM_FIELDS,
-  defaultStudentFormValues,
-  IStudentForm,
-  studentValidationSchema,
-  genderOptions
-} from '../../utils'
+  RECRUITER_FORM_FIELDS,
+  defaultRecruiterFormValues,
+  IRecruiterForm,
+  recruiterValidationSchema
+} from '../utils'
 
 type Props = {
   isOpen: boolean,
   onClose: () => void
 }
 
-const AddStudent: React.FC<Props> = ({ isOpen, onClose }) => {
-  const {
-    NAME,
-    GENDER,
-    MOBILE,
-    EMAIL,
-    DATE_OF_BIRTH,
-    BRANCH,
-    ADDRESS,
-    PASSWORD,
-    PROFILE_PHOTO
-  } = STUDENT_FORM_FIELDS
+const AddRecruiter: React.FC<Props> = ({ isOpen, onClose }) => {
+  const { NAME, WEBSITE, EMAIL, PHONE, ADDRESS, PASSWORD, PROFILE_PHOTO } =
+    RECRUITER_FORM_FIELDS
 
-  const initialValues = useMemo(() => defaultStudentFormValues, [])
+  const initialValues = useMemo(() => defaultRecruiterFormValues, [])
 
   const onSubmit = async (
-    formValues: IStudentForm,
-    { setSubmitting }: FormikHelpers<IStudentForm>
+    formValues: IRecruiterForm,
+    { setSubmitting }: FormikHelpers<IRecruiterForm>
   ) => {
-    // const StudentDTO = {
+    // const RecruiterDTO = {
     //   name: formValues.name,
-    //   gender: formValues.gender,
-    //   mobile: formValues.mobile,
+    //   website: formValues.website,
     //   email: formValues.email,
-    //   dateOfBirth: formValues.dateOfBirth,
-    //   branch: formValues.branch,
+    //   phone: formValues.phone,
     //   address: formValues.address,
     //   password: formValues.password
     // }
@@ -70,16 +57,16 @@ const AddStudent: React.FC<Props> = ({ isOpen, onClose }) => {
     // }
 
     try {
-      // Make API call here to save the student data
-      notifySuccess('Student added successfully!')
+      // Make API call here to save the recruiter data
+      notifySuccess('Recruiter added successfully!')
     } catch (error) {
-      notifyError('Failed to add student')
+      notifyError('Failed to add recruiter')
     } finally {
       setSubmitting(false)
     }
   }
 
-  const renderFormButtons = (formikProps: FormikProps<IStudentForm>) => (
+  const renderFormButtons = (formikProps: FormikProps<IRecruiterForm>) => (
     <ButtonToolbar>
       <Button className="formButton" onClick={() => formikProps.resetForm()}>
         Reset
@@ -90,7 +77,7 @@ const AddStudent: React.FC<Props> = ({ isOpen, onClose }) => {
         type="submit"
         disabled={formikProps.isValidating || formikProps.isSubmitting}
       >
-        Add Student
+        Add Recruiter
       </Button>
     </ButtonToolbar>
   )
@@ -100,42 +87,38 @@ const AddStudent: React.FC<Props> = ({ isOpen, onClose }) => {
       secondary
       open={isOpen}
       onClose={onClose}
-      title="Add Student"
+      title="Add Recruiter"
       size="sm"
       body={
         <div>
           <Formik
             initialValues={initialValues}
-            validationSchema={studentValidationSchema}
+            validationSchema={recruiterValidationSchema}
             enableReinitialize
             onSubmit={onSubmit}
           >
-            {(formikProps: FormikProps<IStudentForm>) => (
+            {(formikProps: FormikProps<IRecruiterForm>) => (
               <Form className="commonForm">
                 <Panel bordered={false}>
-                  <Section title="Student Details">
+                  <Section title="Recruiter Details">
                     <Row>
                       <Col xs={12}>
                         <TextInput
                           formik={formikProps}
                           name={NAME}
-                          placeholder="Full Name"
+                          placeholder="Name"
                           dataType="string"
                         />
                         <FormikErrorMessage name={NAME} />
                       </Col>
                       <Col xs={12}>
-                        <SelectDropdown
-                          searchable={false}
-                          name={GENDER}
-                          data={genderOptions}
-                          placeholder="Select Gender"
-                          onChange={(value) =>
-                            formikProps.setFieldValue(GENDER, value)
-                          }
-                          value={formikProps.values[GENDER]}
+                        <TextInput
+                          formik={formikProps}
+                          name={WEBSITE}
+                          placeholder="Website"
+                          dataType="string"
                         />
-                        <FormikErrorMessage name={GENDER} />
+                        <FormikErrorMessage name={WEBSITE} />
                       </Col>
                     </Row>
                     <Row>
@@ -151,36 +134,11 @@ const AddStudent: React.FC<Props> = ({ isOpen, onClose }) => {
                       <Col xs={12}>
                         <TextInput
                           formik={formikProps}
-                          name={MOBILE}
-                          placeholder="Mobile Number"
+                          name={PHONE}
+                          placeholder="Phone Number"
                           dataType="string"
                         />
-                        <FormikErrorMessage name={MOBILE} />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col xs={12}>
-                        <DatePicker
-                          name={DATE_OF_BIRTH}
-                          format="dd/ MMM/ yyyy"
-                          value={formikProps.values[DATE_OF_BIRTH] || null}
-                          onChange={(date: Date | null) => {
-                            formikProps.setFieldValue(DATE_OF_BIRTH, date)
-                          }}
-                          disabled={false}
-                          placeholder="Date of Birth"
-                          oneTap
-                        />
-                        <FormikErrorMessage name={DATE_OF_BIRTH} />
-                      </Col>
-                      <Col xs={12}>
-                        <TextInput
-                          formik={formikProps}
-                          name={BRANCH}
-                          placeholder="Branch"
-                          dataType="string"
-                        />
-                        <FormikErrorMessage name={BRANCH} />
+                        <FormikErrorMessage name={PHONE} />
                       </Col>
                     </Row>
                     <Row>
@@ -237,4 +195,4 @@ const AddStudent: React.FC<Props> = ({ isOpen, onClose }) => {
   )
 }
 
-export default AddStudent
+export default AddRecruiter

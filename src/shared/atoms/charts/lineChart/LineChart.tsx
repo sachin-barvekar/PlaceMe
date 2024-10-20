@@ -1,15 +1,15 @@
 import React from 'react'
-import { BarChart as RsuiteBarChart } from '@rsuite/charts'
+import { LineChart as RsuiteLineChart } from '@rsuite/charts'
 
-interface BarChartProps {
+interface LineChartProps {
   data: Array<any>;
 }
 
-const BarChart: React.FC<BarChartProps> = ({ data = [], ...rest }) => {
+const LineChart: React.FC<LineChartProps> = ({ data = [], ...rest }) => {
   const processData = (Data: Array<any>): Array<any> => {
-    if (Array.isArray(data)) {
+    if (Array.isArray(Data)) {
       if (typeof Data[0] === 'object' && !Array.isArray(data[0])) {
-        return Data.map((item: any) => {
+        return data.map((item: any) => {
           const keys = Object.keys(item)
           return [item[keys[0]], item[keys[1]]]
         })
@@ -25,10 +25,10 @@ const BarChart: React.FC<BarChartProps> = ({ data = [], ...rest }) => {
   const chartData = processData(data)
 
   return (
-    <div className="pie-chart-container">
-      <RsuiteBarChart data={chartData} {...rest} />
+    <div className="line-chart-container">
+      <RsuiteLineChart data={chartData} {...rest} />
     </div>
   )
 }
 
-export default BarChart
+export default LineChart

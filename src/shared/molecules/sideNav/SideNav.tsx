@@ -8,21 +8,20 @@ import { Divider } from '../../atoms'
 import NavItem from './NavItem'
 import './sideNav.scss'
 import allMenuItems from '../../../config/MenuItems'
-import getRolePermissions from '../../../config/authRoles' // Adjust the import path as needed
+import getRolePermissions from '../../../config/authRoles'
 import useAuth from '../../../hooks/Auth'
 
 const SideNav: React.FC = () => {
-  const { role } = useAuth() // Get the role from your auth context
+  const { role } = useAuth()
   const [activeKey, setActiveKey] = React.useState('1')
   const [expanded, setExpanded] = React.useState(false)
   const clickToggler = () => {
     setExpanded(!expanded)
   }
 
-  // Filter menu items based on role
-  const permissions = getRolePermissions(role) // Get permissions based on role
-  const filteredMenuItems = allMenuItems.filter((item) =>
-    permissions.menuItems.includes(item.name)
+  const permissions = getRolePermissions(role)
+  const filteredMenuItems = allMenuItems.filter(
+    (item) => item && permissions.menuItems.includes(item.name)
   )
 
   return (
@@ -72,15 +71,17 @@ const SideNav: React.FC = () => {
           </div>
           <Sidenav.Body>
             <Nav activeKey={activeKey} onSelect={setActiveKey}>
-              {filteredMenuItems.map((item, index) => (
-                <NavItem
-                  key={index}
-                  id={index.toString()}
-                  name={item.name}
-                  link={item.link}
-                  icon={item.icon} // Pass the icon here
-                />
-              ))}
+              {filteredMenuItems.map((item, index) =>
+                item ? (
+                  <NavItem
+                    key={item.name}
+                    id={item.name}
+                    name={item.name}
+                    link={item.link}
+                    icon={item.icon}
+                  />
+                ) : null
+              )}
               <Divider />
               <NavItem
                 name="Help"

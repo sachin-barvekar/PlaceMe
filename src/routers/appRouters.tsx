@@ -11,12 +11,22 @@ const DashboardPage = React.lazy(() => import('../pages/dashboard/Dashboard'))
 const StudentListPage = React.lazy(
   () => import('../pages/students/studentList/StudentList')
 )
+const RecruiterListPage = React.lazy(
+  () => import('../pages/recruiters/recruitersList/RecruitersList')
+)
+const JobOpeningListPage = React.lazy(
+  () => import('../pages/jobOpenings/jobOpeningsList/JobOpeningsList')
+)
+const PlacedStudentsListPage = React.lazy(
+  () => import('../pages/placeStudents/placeStudentsList/PlaceStudentsList')
+)
+
 type AuthGuardProps = {
   children: ReactElement,
   allowedRoles?: string[]
 }
 
-function AuthGuard({ children, allowedRoles  }: AuthGuardProps) {
+function AuthGuard({ children, allowedRoles }: AuthGuardProps) {
   const authContext = useContext(AuthContext)
 
   if (authContext?.loading) {
@@ -27,8 +37,11 @@ function AuthGuard({ children, allowedRoles  }: AuthGuardProps) {
     return <Navigate to="/auth" />
   }
 
-  if (allowedRoles && !allowedRoles.includes(authContext.role!)) {
-    // Redirect if user doesn't have the required role
+  if (
+    authContext.role !== null &&
+    allowedRoles?.length &&
+    !allowedRoles.includes(authContext.role)
+  ) {
     return <Navigate to="/unauthorized" />
   }
 
@@ -57,17 +70,41 @@ const appRouter = () =>
           children: [
             {
               path: '/',
-              element:  (
-                <AuthGuard allowedRoles={['admin','student','recruiter']}>
+              element: (
+                <AuthGuard allowedRoles={['admin', 'student', 'recruiter']}>
                   <DashboardPage />
                 </AuthGuard>
-                )
+              )
             },
             {
               path: '/student',
               element: (
                 <AuthGuard allowedRoles={['admin']}>
                   <StudentListPage />
+                </AuthGuard>
+              )
+            },
+            {
+              path: '/recruiter',
+              element: (
+                <AuthGuard allowedRoles={['admin']}>
+                  <RecruiterListPage />
+                </AuthGuard>
+              )
+            },
+            {
+              path: '/openings',
+              element: (
+                <AuthGuard allowedRoles={['admin']}>
+                  <JobOpeningListPage />
+                </AuthGuard>
+              )
+            },
+            {
+              path: '/placed-students',
+              element: (
+                <AuthGuard allowedRoles={['admin']}>
+                  <PlacedStudentsListPage />
                 </AuthGuard>
               )
             }

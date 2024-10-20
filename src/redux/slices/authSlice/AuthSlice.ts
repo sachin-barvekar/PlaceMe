@@ -17,7 +17,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loginStart(state) {
-      state.loading = true
+      return { ...state, loading: true }
     },
     loginSuccess(
       state,
@@ -26,17 +26,18 @@ const authSlice = createSlice({
         role: 'admin' | 'student' | 'recruiter' | null
       }>
     ) {
-      state.user = action.payload.user
-      state.role = action.payload.role
-      state.loading = false
+      return {
+        ...state,
+        user: action.payload.user,
+        role: action.payload.role,
+        loading: false
+      }
     },
     loginFailure(state) {
-      state.loading = false
+      return { ...state, loading: false }
     },
     logout(state) {
-      state.user = null
-      state.role = null
-      state.loading = false
+      return { ...state, user: null, role: null, loading: false }
     }
   }
 })

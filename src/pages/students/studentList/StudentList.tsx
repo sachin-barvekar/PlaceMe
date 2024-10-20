@@ -2,78 +2,111 @@ import { FC, useCallback, useState } from 'react'
 // import { SortType } from 'rsuite-table'
 import { Table, Toolbar } from '../../../shared'
 import '../../../scss/common/list/List.scss'
-import UserPayment from './addStudent/AddStudent'
+import AddStudent from './addStudent/AddStudent'
 
-const { Column, HeaderCell, Cell } = Table
-
+const { Column, HeaderCell, ActionCell, StatusCell, ProfileIconCell, Cell } =
+  Table
 
 const COLUMNS = [
   { key: 'fullName', label: 'Full Name' },
   { key: 'email', label: 'Email' },
-  { key: 'course', label: 'Course' },
-  { key: 'mobile', label: 'Mobile Number' }
+  { key: 'mobile', label: 'Mobile Number' },
+  { key: 'gender', label: 'Gender' },
+  { key: 'dob', label: 'Date of Birth' },
+  { key: 'branch', label: 'Branch' },
+  { key: 'address', label: 'Address' }
 ]
 
 const mockStudentData = [
   {
     fullName: 'Rajesh Kumar',
-    email: 'rajesh.kumar@example.com',
-    course: 'Computer Science',
-    mobile: '+91 9876543210'
+    address: '123 Main St, Mumbai',
+    gender: 'Male',
+    dob: '1998-05-12',
+    mobile: '+91 9876543210',
+    branch: 'Computer Science',
+    email: 'rajesh.kumar@example.com'
   },
   {
     fullName: 'Anita Sharma',
-    email: 'anita.sharma@example.com',
-    course: 'Information Technology',
-    mobile: '+91 9123456789'
+    address: '45 Sector Road, Delhi',
+    gender: 'Female',
+    dob: '1997-11-21',
+    mobile: '+91 9123456789',
+    branch: 'Information Technology',
+    email: 'anita.sharma@example.com'
   },
   {
     fullName: 'Vikram Singh',
-    email: 'vikram.singh@example.com',
-    course: 'Mechanical Engineering',
-    mobile: '+91 9988776655'
+    address: '99 Green Park, Pune',
+    gender: 'Male',
+    dob: '1996-07-07',
+    mobile: '+91 9988776655',
+    branch: 'Mechanical Engineering',
+    email: 'vikram.singh@example.com'
   },
   {
     fullName: 'Neha Patel',
-    email: 'neha.patel@example.com',
-    course: 'Civil Engineering',
-    mobile: '+91 9090909090'
+    address: '202 Civil St, Ahmedabad',
+    gender: 'Female',
+    dob: '1998-02-18',
+    mobile: '+91 9090909090',
+    branch: 'Civil Engineering',
+    email: 'neha.patel@example.com'
   },
   {
     fullName: 'Amitabh Desai',
-    email: 'amitabh.desai@example.com',
-    course: 'Electrical Engineering',
-    mobile: '+91 9876541234'
+    address: '350 Park Lane, Bangalore',
+    gender: 'Male',
+    dob: '1997-09-09',
+    mobile: '+91 9876541234',
+    branch: 'Electrical Engineering',
+    email: 'amitabh.desai@example.com'
   },
   {
     fullName: 'Sachin Barvekar',
-    email: 'sachin.barvekar@example.com',
-    course: 'Computer',
-    mobile: '+91 9123456780'
+    address: '101 Tech Valley, Pune',
+    gender: 'Male',
+    dob: '1998-01-15',
+    mobile: '+91 9123456780',
+    branch: 'Computer Engineering',
+    email: 'sachin.barvekar@example.com'
   },
   {
     fullName: 'Priya Mehta',
-    email: 'priya.mehta@example.com',
-    course: 'Biomedical Engineering',
-    mobile: '+91 9876545678'
+    address: '27 Lakeview Road, Kolkata',
+    gender: 'Female',
+    dob: '1999-03-27',
+    mobile: '+91 9876545678',
+    branch: 'Biomedical Engineering',
+    email: 'priya.mehta@example.com'
   },
   {
     fullName: 'Rahul Gupta',
-    email: 'rahul.gupta@example.com',
-    course: 'Chemical Engineering',
-    mobile: '+91 9812345678'
+    address: '18 Chemical St, Jaipur',
+    gender: 'Male',
+    dob: '1997-08-04',
+    mobile: '+91 9812345678',
+    branch: 'Chemical Engineering',
+    email: 'rahul.gupta@example.com'
   },
   {
     fullName: 'Sanjay Kapoor',
-    email: 'sanjay.kapoor@example.com',
-    course: 'Aerospace Engineering',
-    mobile: '+91 9876543211'
+    address: '102 Space Park, Hyderabad',
+    gender: 'Male',
+    dob: '1996-12-25',
+    mobile: '+91 9876543211',
+    branch: 'Aerospace Engineering',
+    email: 'sanjay.kapoor@example.com'
   },
   {
     fullName: 'Sakshi Deshmukh',
-    email: 'sakshi.deshmukh@example.com',
-    course: 'Computer Science',
-    mobile: '+91 9123456781'
+    address: '65 Broadway, Pune',
+    gender: 'Female',
+    dob: '1998-06-13',
+    mobile: '+91 9123456781',
+    branch: 'Computer Science',
+    email: 'sakshi.deshmukh@example.com'
   }
 ]
 
@@ -81,7 +114,7 @@ const StudentList: FC = () => {
   // Using state for mock data
   const [data] = useState(mockStudentData)
   const [isFetching] = useState(false)
-  const [isModalOpen, setIsModalOpen]=useState<boolean>(false)
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
   const handleSortColumn = useCallback(() => {
     // Implement sorting logic here if needed
@@ -89,6 +122,21 @@ const StudentList: FC = () => {
 
   const handleRowClick = () => {
     // Handle row click action if needed
+  }
+  const handleAction = (
+    action: string | undefined,
+    rowData: AnimationPlayState
+  ) => {
+    switch (action) {
+      case '5':
+        break
+      case '6':
+        break
+      case '8':
+        break
+      default:
+        break
+    }
   }
 
   const options = [
@@ -110,7 +158,7 @@ const StudentList: FC = () => {
         options={options}
         onSearchChange={() => {}}
         total={data.length ?? 0}
-        buttonName='Add Student'
+        buttonName="Add Student"
         onButtonClick={() => setIsModalOpen(true)}
       />
       <div className="user-list__main-container">
@@ -125,25 +173,46 @@ const StudentList: FC = () => {
           defaultPageSize={10}
           onPageChange={() => {}}
         >
+          <Column flexGrow={0.5}>
+            <HeaderCell>Profile</HeaderCell>
+            <ProfileIconCell imgKey="photoUrl" />
+          </Column>
           {COLUMNS.map((column, index) => {
             const { key, label } = column
 
             return (
               <Column
-                flexGrow={1}
+                flexGrow={1.2}
                 key={key}
                 align={index === 0 ? 'left' : 'center'}
                 sortable
               >
                 <HeaderCell>{label}</HeaderCell>
 
-                <Cell dataKey={key} />
+                <Cell dataKey={key} tooltip />
               </Column>
             )
           })}
+          <Column flexGrow={1} key="Status" sortable>
+            <HeaderCell>Status</HeaderCell>
+            <StatusCell
+              negDataLabel="Inactive"
+              posDataLabel="Active"
+              dataKey="active"
+            />
+          </Column>
+          <Column flexGrow={1} key="action">
+            <HeaderCell>Action</HeaderCell>
+            <ActionCell
+              tooltip
+              dataKey="action"
+              onAction={handleAction}
+              actionOptions={['View', 'Edit', 'Delete']}
+            />
+          </Column>
         </Table>
       </div>
-      <UserPayment isOpen={isModalOpen} onClose={()=>setIsModalOpen(false)}/>
+      <AddStudent isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   )
 }

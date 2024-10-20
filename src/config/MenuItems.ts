@@ -1,12 +1,11 @@
 import { AiOutlineHome } from 'react-icons/ai'
-import NoticeIcon from '@rsuite/icons/Notice'
 import {
   MdBusiness,
   MdAssignmentTurnedIn,
   MdStars,
   MdFeedback
 } from 'react-icons/md'
-import { FaUserGraduate, FaSignOutAlt, FaRegHandshake } from 'react-icons/fa'
+import { FaUserGraduate, FaRegHandshake } from 'react-icons/fa'
 import UserInfoIcon from '@rsuite/icons/UserInfo'
 
 const allMenuItems = [
@@ -36,8 +35,8 @@ const allMenuItems = [
   },
   {
     id: '5',
-    name: 'Selected Students',
-    link: '/selected',
+    name: 'Placed Students',
+    link: '/placed-students',
     icon: FaUserGraduate
   },
   {
@@ -64,24 +63,11 @@ const allMenuItems = [
     link: '/application',
     icon: MdFeedback
   },
-  ,
   {
     id: '10',
-    name: 'Notifications',
-    link: '/notification',
-    icon: NoticeIcon
-  },
-  {
-    id: '11',
     name: 'Feedback',
     link: '/feedback',
     icon: MdFeedback
-  },
-  {
-    id: '12',
-    name: 'Signout',
-    link: '/signout',
-    icon: FaSignOutAlt
   }
 ]
 
